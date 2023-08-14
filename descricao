@@ -1,0 +1,69 @@
+ng-app
+	declara aplicação
+
+ng-controller
+	view para controller
+	
+ng-bind
+	recebe o valor do scope na propria tag
+	substitui o elemento por uma expressao
+
+ng-repeat
+	consegue iterar uma lista do controller
+	percorre a lista e trabalha com cada elemento
+
+	ex:
+	                <tr ng-repeat="registro in registros">
+						<td>{{registro.nome}}</td>
+						<td>{{registro.telefone}}</td>
+
+									ou
+
+						<td ng-repeat="(key,value) in registro">
+							{{value}}
+						</td>
+                	</tr>
+
+
+ng-model
+	atribui uma propriedade ao scope
+
+ng-click
+	atribui um comportamento a um evento de clique em um elemento
+
+ng-disabled
+	desabilita um elemento de acordo com alguma função
+
+ng-options
+
+ng-class // ng-style
+    permite alterar classe e estilos css
+
+ng-include
+    permite colocar o conteúdo de outro arquivo HTML atraves de uma div
+
+
+#######validação de formulário
+
+ng-pattern
+    permite criar expressoes regulares para validar um dado campo
+
+
+#######expressoes de filtro
+    uppercase -> transforma tudo em maiúsculo(o valor original continua inalterado)
+    lowercase -> transforma tudo em minúsculo(o valor original continua inalterado)
+    filter -> permite alterar o parametro de acordo com o valor passado(dinamico ou estatico)
+    orderby -> permite alterar o parametro de organização por uma ordem passada
+    currency -> ordena por moedas
+    number -> similar ao currency mas
+
+
+####interações http
+
+$http
+    permite realizar requisições HTTP utilizando XMLHttpRequest ou via JSON(get,post,put,delete,head,jsonp)
+
+Obs: Controle de atendimento de primeiro nível
+	SW-PROCESSAMENTO: RADAMS
+	SW-EQUIPAMENTO: GEISSIVAN
+	HW-EQUIPAMENTO: GABRIEL
