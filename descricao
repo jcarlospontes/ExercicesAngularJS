@@ -58,6 +58,20 @@ ng-pattern
     number -> similar ao currency mas
 
 
+criação de diretiva -> template/replace
+    replace -> aplicar alguma classe ou remover um elemento/diretiva
+
+    restrict -> 4 formas de aplicar
+        1. diretiva restrita ao atributo do elemento
+        2. diretiva restrita ao elemento
+        3. diretiva restrita a classe do elemento
+        4. diretiva restrita ao comentário do elemento
+
+    scope -> o @ vincula o atributo com o escopo da diretiva direcionalmente
+             o = vincula bidirecionalemnte a propriedade do escopo do templete a uma propriedade do scope da diretiva
+
+    translude -> permite encapsular elementos na diretiva
+
 ####interações http
 
 $http
@@ -67,3 +81,9 @@ Obs: Controle de atendimento de primeiro nível
 	SW-PROCESSAMENTO: RADAMS
 	SW-EQUIPAMENTO: GEISSIVAN
 	HW-EQUIPAMENTO: GABRIEL
+
+
+####
+
+link
+    executa apos o template ser compilado e podemos interagir com a DOM tratando eventos

@@ -1,25 +1,30 @@
-angular.module("catalogoRegistros").controller("registroController", function($scope, $http){
+angular.module("catalogoRegistros").controller("registroController", function($scope, operadorasAPI, registrosAPI, serialGenerator){
+    console.log(serialGenerator.generate());
+
     $scope.var = "Registro"
     $scope.registros = [];
 
     $scope.operadoras = [];
 
     var carregarRegistros = function (){
-        $http.get("http://localhost:3412/registros").then(function(response){
+        registrosAPI.getRegistros().then(function(response){
             $scope.registros = response.data;
+        }).catch(function (erro){
+            $scope.error = "Erro ao tentar acessar os registros";
         });
     };
 
     var carregarOperadoras = function (){
-        $http.get("http://localhost:3412/operadoras").then(function(response){
+        operadorasAPI.getOperadoras().then(function(response){
             $scope.operadoras = response.data;
         });
     };
 
     $scope.adicionarRegistro = function(registro) {
+        registro.serial = serialGenerator.generate();
         registro.cor = "red";
         registro.data = new Date();
-        $http.post("http://localhost:3412/registros", registro).then(function(data){
+        registrosAPI.saveRegistros(registro).then(function(data){
             delete $scope.registro;
             $scope.registroForm.$setPristine();
             carregarRegistros();
