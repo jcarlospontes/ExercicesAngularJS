@@ -1,0 +1,29 @@
+Criação de Diretiva
+
+##no index.html -> <script src="js/directive/nomeDiretivaDirective.js"></script>
+angular.module("nomeProjeto").directive("nomeDiretiva", function(){
+	return{
+		template: <div class="nomeclasse">{{title}}</div>,
+				ou
+		templateUrl: "view/nome.html",
+		replace: true,
+		restrict: "AE",
+		scope: {
+			topic: "@title",
+			message: "=message"
+		}
+	};
+});
+
+usando no HTML-> <div nome-diretiva></div> ou <nome-diretiva title="algo" message=""></nome-diretiva>
+
+##obs: Nem toda diretiva tem template(ex:ng-if, ng-show)
+##	   Quando usamos a tag da diretiva "nomeDiretiva" fica no index.html "nome-diretiva"
+##	   O replace faz com que tenhamos diretamente o template aplicado substituido pela tag/div chamadora(uso querendo usar classe com hierarquia)
+##	   O restrict restringe o que queremos usar da diretiva(ex:atributo,elemento, classe ou comentario)("A","E","C","M")
+##	   Regra restrict: quer mudar comportamento: "A"
+##	   Regra restrict: quer mostrar algum elemento: "E"
+##	   O scope faz com que tudo dentro da diretiva tenha um scope proprio(não sera dividido nada com os elementos onde foi chamado(controller, etc))
+##	   O mapeamento do scope para atributo do elemento é passado pelo @ no scope.(atributo -> scope)
+##	   O mapeamento bidirecional = permite linkar o scope a um scope fora da diretiva passada por atributo.
+##	   O transclude faz o encapsulamento de elementos dentro da diretiva permitindo um scope nao isolado(herda tudo fora da directive para o novo scope).
