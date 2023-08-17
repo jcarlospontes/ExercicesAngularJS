@@ -1,0 +1,49 @@
+<div class="jumbotron">
+  <div>
+    <h4>{{titulo}}</h4>
+    <ui-alert ng-show="error" title="Um problema aconteceu!" >
+      {{error}}
+    </ui-alert>
+    <input type="text" ng-model="busca" placeholder="Digite para filtrar" class="form-control"/>
+    <table class="table">
+      <tr>
+        <th></th>
+        <th><a href="" ng-click="ordenarPor('serial')" >Serial</a></th>
+        <th><a href="" ng-click="ordenarPor('nome')" >Nome</a></th>
+        <th><a href="" ng-click="ordenarPor('telefone')" >Telefone</a></th>
+        <th><a href="" ng-click="ordenarPor('idade')" >Idade</a></th>
+        <th><a href="" ng-click="ordenarPor('operadora.nome')" >Operadora</a></th>
+        <th><a href="" ng-click="ordenarPor('data')" >Data de Inclusão</a></th>
+        <th>Status</th>
+      </tr>
+      <tr ng-class="{selecionado: registro.selecionado}"
+          ng-repeat="registro in registros | filter:busca | orderBy:ordenacao:valordem"
+          ng-class="classe1">
+        <td><input type="checkbox" ng-model="registro.selecionado"></td>
+        <td>{{registro.serial}}</td>
+        <td>{{registro.nome | name | ellipsis:20}}</td>
+        <td>{{registro.telefone}}</td>
+        <td>{{registro.idade}}</td>
+        <td>{{registro.operadora.nome}}</td>
+        <td>{{registro.data | date: 'dd/MM/yyyy'}}</td>
+        <td><div ng-click="alternarStatus()"
+                 style="margin-left: 20px; width: 20px; height: 20px;"
+                 ng-style="{'background-color': getCor(registro)}"></div></td>
+      </tr>
+    </table>
+    <hr/>
+    <a class="btn btn-primary btn-block" href="#!/novoRegistro">Novo Registro</a>
+    <button class="btn btn-danger btn-block"
+            ng-click="removerRegistro(registros)"
+            ng-disabled="!registroSelecionado(registros)">Remover Registro(s)</button>
+    <br>
+    <button ng-show="registroSelecionado(registros)"
+            class="btn btn-success"
+            ng-click="ativarStatus(registros)"
+            ng-disabled="!registroSelecionado(registros)">Ativar</button>
+    <button ng-show="registroSelecionado(registros)"
+            class="btn btn-dark"
+            ng-click="desativarStatus(registros)"
+            ng-disabled="!registroSelecionado(registros)">Desativar</button>
+  </div>
+</div>

@@ -15,9 +15,9 @@ var registros = [
     {serial:"OIU^37W_[Z" ,nome: "Ana", telefone: "(11) 9 8332-3232", idade: "32", data: new Date(), operadora:{nome: "Tim", codigo: "12"} , status:false}
 ];
 var operadoras = [
-    {nome: "Tim", codigo: "11"},
-    {nome: "Claro", codigo: "12"},
-    {nome: "Vivo", codigo: "13"}
+    {nome: "Tim", codigo: "11", preco: 2},
+    {nome: "Claro", codigo: "12", preco: 1},
+    {nome: "Vivo", codigo: "13", preco: 3}
 ];
 
 app.listen(process.env.PORT || 3412);
@@ -32,6 +32,11 @@ app.use(function(req, res, next) {
 app.get('/registros', function(req, res) {
     res.json(registros);
 });
+
+app.get('/registros/:id', function(req, res) {
+    res.json(registros.find(c => c.id === req.params.id));
+});
+
 app.post('/registros', function(req, res) {
     registros.push(req.body);
     res.json(true);

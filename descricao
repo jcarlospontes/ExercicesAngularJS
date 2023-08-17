@@ -82,6 +82,12 @@ Obs: Controle de atendimento de primeiro nível
 	SW-EQUIPAMENTO: GEISSIVAN
 	HW-EQUIPAMENTO: GABRIEL
 
+####
+
+modularização poder feita desacoplando a Directive ou Service do projeto e sendo criada separadamente em uma pasta lib
+apos isso podemos referenciar a biblioteca no app.js
+
+atraves do $templateCache podemos injetar um codigo html dentro de uma diretiva.
 
 ####
 

@@ -1,5 +1,5 @@
-angular.module("catalogoRegistros").controller("registroController", function($scope, operadorasAPI, registrosAPI, serialGenerator){
-    console.log(serialGenerator.generate());
+angular.module("catalogoRegistros").controller("registroController", function($scope, registrosAPI, serialGenerator, operadoras){
+    $scope.operadoras = operadoras.data;
 
     $scope.titulo = "Registro de funcionários"
     $scope.registros = [];
@@ -12,12 +12,6 @@ angular.module("catalogoRegistros").controller("registroController", function($s
             $scope.registros = response.data;
         }).catch(function (erro){
             $scope.error = "Erro ao tentar acessar os registros";
-        });
-    };
-
-    var carregarOperadoras = function (){
-        operadorasAPI.getOperadoras().then(function(response){
-            $scope.operadoras = response.data;
         });
     };
 
@@ -79,7 +73,6 @@ angular.module("catalogoRegistros").controller("registroController", function($s
     }
 
     carregarRegistros();
-    carregarOperadoras();
 
 
     $scope.classe1 = "negrito";

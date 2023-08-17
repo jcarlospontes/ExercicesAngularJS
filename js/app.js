@@ -1,1 +1,1 @@
-angular.module("catalogoRegistros", []);
+angular.module("catalogoRegistros", ["serialGenerator", "ui", "ngRoute"]);
