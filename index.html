@@ -18,6 +18,7 @@
     <script src="js/filters/ellipsisFilter.js"></script>
     <script src="js/directives/uiAlertDirective.js"></script>
     <script src="js/directives/uiDateDirective.js"></script>
+    <script src="js/directives/uiTelefoneDirective.js"></script>
     <script src="js/configValue.js"></script>
 
 </head>
@@ -58,19 +59,19 @@
             <hr/>
             <form name="registroForm">
                 <input name="nome"
-                       ng-maxlength="22"
                        ng-required="true"
                        class="form-control"
                        type="text"
                        ng-model="registro.nome"
                        placeholder="Nome"/>
                 <input name="telefone"
-                       ng-minlength="11"
+                       ng-minlength="14"
                        ng-required="true"
                        class="form-control"
-                       type="number"
+                       type="text"
                        ng-model="registro.telefone"
-                       placeholder="Telefone"/>
+                       placeholder="Telefone"
+                       ui-telefone/>
                 <input name="idade"
                        ng-maxlength="3"
                        ng-minlength="2"
@@ -81,6 +82,7 @@
                        placeholder="Idade"/>
                 <input name="data"
                        class="form-control"
+                       ng-required="true"
                        type="text"
                        ng-model="registro.data"
                        placeholder="Data"
@@ -92,17 +94,22 @@
                     <option value="">Selecione uma Operadora</option>
                 </select>
             </form>
-            <div ng-show="registroForm.nome.$invalid && registroForm.nome.$dirty" class="alert-danger">
+            <div ng-show="registroForm.nome.$invalid && apertou" class="alert-danger">
                 Nome Inválido!
             </div>
-            <div ng-show="registroForm.telefone.$invalid && registroForm.telefone.$dirty" class="alert-danger">
+            <div ng-show="registroForm.telefone.$invalid && apertou" class="alert-danger">
                 Telefone Inválido!
             </div>
-            <div ng-show="registroForm.idade.$invalid && registroForm.idade.$dirty" class="alert-danger">
+            <div ng-show="registroForm.idade.$invalid && apertou" class="alert-danger">
                 Idade Inválida!
             </div>
+            <div ng-show="registroForm.data.$invalid && apertou" class="alert-danger">
+                Data Inválida!
+            </div>
+            <div ng-show="registro.operadora.nome === undefined && apertou" class="alert-danger">
+                Selecione uma operadora!
+            </div>
             <button class="btn btn-primary btn-block"
-                    ng-disabled="registroForm.$invalid"
                     ng-click="adicionarRegistro(registro)">Adicionar Registro</button>
             <button class="btn btn-danger btn-block"
                     ng-click="removerRegistro(registros)"

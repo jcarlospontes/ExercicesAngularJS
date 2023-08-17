@@ -3,6 +3,7 @@ angular.module("catalogoRegistros").controller("registroController", function($s
 
     $scope.titulo = "Registro"
     $scope.registros = [];
+    $scope.apertou = false;
 
     $scope.operadoras = [];
 
@@ -21,15 +22,21 @@ angular.module("catalogoRegistros").controller("registroController", function($s
     };
 
     $scope.adicionarRegistro = function(registro) {
-        registro.serial = serialGenerator.generate();
-        registro.cor = "red";
-        registro.data = new Date();
-        registrosAPI.saveRegistros(registro).then(function(data){
-            delete $scope.registro;
-            $scope.registroForm.$setPristine();
-            carregarRegistros();
+        if(!$scope.registroForm.$invalid){
+            $scope.apertou = false;
+            registro.serial = serialGenerator.generate();
+            registro.cor = "red";
+            registro.data = new Date();
+            registrosAPI.saveRegistros(registro).then(function(data){
+                delete $scope.registro;
+                $scope.registroForm.$setPristine();
+                carregarRegistros();
 
-        });
+            });
+        }
+        else{
+            $scope.apertou = true;
+        }
     };
 
     $scope.removerRegistro = function(registros){
