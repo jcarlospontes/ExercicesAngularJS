@@ -24,7 +24,7 @@
 <body>
     <div class="jumbotron">
         <div ng-controller="registroController">
-            <h4>{{var}}</h4>
+            <h4>{{titulo}}</h4>
             <ui-alert ng-show="error" title="Um problema aconteceu!" >
                 {{error}}
             </ui-alert>
@@ -107,6 +107,7 @@
             <button class="btn btn-danger btn-block"
                     ng-click="removerRegistro(registros)"
                     ng-disabled="!registroSelecionado(registros)">Remover Registro(s)</button>
+            <br>
             <button ng-show="registroSelecionado(registros)"
                     class="btn btn-success"
                     ng-click="ativarStatus(registros)"
