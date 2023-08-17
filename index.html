@@ -19,17 +19,26 @@
     <script src="js/directives/uiAlertDirective.js"></script>
     <script src="js/directives/uiDateDirective.js"></script>
     <script src="js/directives/uiTelefoneDirective.js"></script>
+    <script src="js/directives/uiAccordionDirective.js"></script>
     <script src="js/configValue.js"></script>
 
 </head>
-<body>
+<body ng-controller="registroController">
     <div class="jumbotron">
-        <div ng-controller="registroController">
+        <ui-accordions>
+            <ui-accordion title="Accordion 1">
+                Qualidadesdaasdasd
+            </ui-accordion>
+            <ui-accordion title="Accordion 2">
+                Qualidadesdaasdasd
+            </ui-accordion>
+        </ui-accordions>
+        <div>
             <h4>{{titulo}}</h4>
             <ui-alert ng-show="error" title="Um problema aconteceu!" >
                 {{error}}
             </ui-alert>
-            <input type="text" ng-model="busca" placeholder="Busca no registro" class="form-control"/>
+            <input type="text" ng-model="busca" placeholder="Digite para filtrar" class="form-control"/>
             <table class="table">
                 <tr>
                     <th></th>
@@ -37,7 +46,7 @@
                     <th><a href="" ng-click="ordenarPor('nome')" >Nome</a></th>
                     <th><a href="" ng-click="ordenarPor('telefone')" >Telefone</a></th>
                     <th><a href="" ng-click="ordenarPor('idade')" >Idade</a></th>
-                    <th><a href="" ng-click="ordenarPor('operadora')" >Operadora</a></th>
+                    <th><a href="" ng-click="ordenarPor('operadora.nome')" >Operadora</a></th>
                     <th><a href="" ng-click="ordenarPor('data')" >Data de Inclusão</a></th>
                     <th>Status</th>
                 </tr>

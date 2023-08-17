@@ -10,9 +10,9 @@ app.use(express.json());
 
 
 var registros = [
-    {serial: "%/42=\\FNO-" ,nome: "João", telefone: "99999999", idade: "18", data: new Date(), operadora:{nome: "Vivo", codigo: "12"} , status:false},
-    {serial: "WS2SXV[$L/",nome: "Pedro", telefone: "99999998", idade: "44", data: new Date(), operadora:{nome: "Claro", codigo: "12"} , status:false},
-    {serial:"OIU^37W_[Z" ,nome: "Ana", telefone: "99999997", idade: "32", data: new Date(), operadora:{nome: "Tim", codigo: "12"} , status:false}
+    {serial: "%/42=\\FNO-" ,nome: "João", telefone: "(85) 9 8787-8787", idade: "18", data: new Date(), operadora:{nome: "Vivo", codigo: "12"} , status:false},
+    {serial: "WS2SXV[$L/",nome: "Pedro", telefone: "(85) 3232-3232", idade: "44", data: new Date(), operadora:{nome: "Claro", codigo: "12"} , status:false},
+    {serial:"OIU^37W_[Z" ,nome: "Ana", telefone: "(11) 9 8332-3232", idade: "32", data: new Date(), operadora:{nome: "Tim", codigo: "12"} , status:false}
 ];
 var operadoras = [
     {nome: "Tim", codigo: "11"},

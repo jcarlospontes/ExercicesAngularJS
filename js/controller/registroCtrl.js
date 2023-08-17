@@ -1,7 +1,7 @@
 angular.module("catalogoRegistros").controller("registroController", function($scope, operadorasAPI, registrosAPI, serialGenerator){
     console.log(serialGenerator.generate());
 
-    $scope.titulo = "Registro"
+    $scope.titulo = "Registro de funcionários"
     $scope.registros = [];
     $scope.apertou = false;
 
