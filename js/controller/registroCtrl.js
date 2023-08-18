@@ -1,43 +1,42 @@
-angular.module("catalogoRegistros").controller("registroController", function($scope, registrosAPI, serialGenerator, operadoras){
+angular.module("catalogoRegistros").controller("registroController", function($scope, registros, serialGenerator, operadoras){
     $scope.operadoras = operadoras.data;
 
     $scope.titulo = "Registro de funcionários"
-    $scope.registros = [];
+    $scope.registros = registros.data;
     $scope.apertou = false;
+    $scope.operadoras = operadoras.data;
 
-    $scope.operadoras = [];
+    var init = function (){
+        calcularImpostos($scope.registros);
+        generateSerial($scope.registros);
+    };
 
-    var carregarRegistros = function (){
-        registrosAPI.getRegistros().then(function(response){
-            $scope.registros = response.data;
-        }).catch(function (erro){
-            $scope.error = "Erro ao tentar acessar os registros";
+    var calcularImpostos = function (registros){
+        registros.forEach(function (registro){
+            registro.operadora.precoComImposto = calcularImposto(registro.operadora.preco);
+        });
+    };
+    var generateSerial = function (registros){
+      registros.forEach(function (item){
+          item.serial = serialGenerator.generate();
+      });
+    };
+
+    $scope.adicionarRegistro = function (registro) {
+        registro.serial = serialGenerator.generate();
+        registrosAPI.saveRegistros(registro).success(function (data) {
+            delete $scope.registro;
+            $scope.registrosForm.$setPristine();
+            carregarRegistros();
         });
     };
 
-    $scope.adicionarRegistro = function(registro) {
-        if(!$scope.registroForm.$invalid){
-            $scope.apertou = false;
-            registro.serial = serialGenerator.generate();
-            registro.cor = "red";
-            registro.data = new Date();
-            registrosAPI.saveRegistros(registro).then(function(data){
-                delete $scope.registro;
-                $scope.registroForm.$setPristine();
-                carregarRegistros();
-
-            });
-        }
-        else{
-            $scope.apertou = true;
-        }
-    };
-
-    $scope.removerRegistro = function(registros){
-        $scope.registros = registros.filter(function (registro){
-           if(!registro.selecionado) return registro;
+    $scope.removerRegistros = function (registros) {
+        $scope.registros = registros.filter(function (registro) {
+            if (!registro.selecionado) return registro;
         });
-    }
+        $scope.verificarRegistroSelecinado($scope.registros);
+    };
 
     $scope.getCor = function(registro){
         if(registro.status){
@@ -60,11 +59,12 @@ angular.module("catalogoRegistros").controller("registroController", function($s
         });
     }
 
-    $scope.registroSelecionado = function(registros){
-        return registros.some(function (registro){
-           return registro.selecionado;
+
+    $scope.verificarRegistroSelecinado = function (registros){
+        $scope.hasRegistroSelecionado = registros.some(function (registro){
+            return registro.selecionado;
         });
-    }
+    };
 
 
     $scope.ordenarPor = function(campo){
@@ -72,12 +72,12 @@ angular.module("catalogoRegistros").controller("registroController", function($s
         $scope.valordem = !$scope.valordem;
     }
 
-    carregarRegistros();
+    var calcularImposto = function (preco){
+        var imposto = 1.2;
+        return preco * imposto;
+    };
 
 
-    $scope.classe1 = "negrito";
-    $scope.classe2 = "selecionado";
-    $scope.validname = false;
-    $scope.validtel = false;
-    $scope.valordem = true;
+    init();
+
 });

@@ -21,5 +21,19 @@ angular.module("catalogoRegistros").config(function ($routeProvider){
         }
     });
 
+    $routeProvider.when("/detalhesRegistro/:id",{
+        templateUrl: "view/detalhesRegistro.html",
+        controller: "detalhesRegistroCtrl",
+        resolve: {
+            registro: function (registrosAPI, $route){
+                return registrosAPI.getRegistro($route.current.params.id);
+            }
+        }
+    });
+
+    $routeProvider.when("/error",{
+        templateUrl: "view/error.html",
+    });
+
     $routeProvider.otherwise({redirectTo: "/registros"});
 });

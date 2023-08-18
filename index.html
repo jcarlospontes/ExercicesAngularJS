@@ -16,20 +16,30 @@
     <script src="js/app.js"></script>
     <script src="js/controller/registroCtrl.js"></script>
     <script src="js/controller/novoRegistroCtrl.js"></script>
+    <script src="js/controller/detalhesRegistroCtrl.js"></script>
     <script src="js/services/registrosAPIService.js"></script>
     <script src="js/services/operadorasAPIService.js"></script>
     <script src="js/config/serialGeneratorConfig.js"></script>
     <script src="js/config/routeConfig.js"></script>
+    <script src="js/config/interceptorsConfig.js"></script>
     <script src="js/filters/nameFilter.js"></script>
     <script src="js/filters/ellipsisFilter.js"></script>
     <script src="js/directives/uiAlertDirective.js"></script>
     <script src="js/directives/uiDateDirective.js"></script>
     <script src="js/directives/uiTelefoneDirective.js"></script>
     <script src="js/configValue.js"></script>
+    <script src="js/interceptors/timestampInterceptor.js"></script>
+    <script src="js/interceptors/errorInterceptor.js"></script>
+    <script src="js/interceptors/loadingInterceptor.js"></script>
 
 </head>
 <body>
-    <div ng-view></div>
-    <div ng-include="'view/footer.html'"></div>
+    <div class="jumbotron" ng-show="loading">
+        <h5>Carregando</h5>
+    </div>
+    <div ng-hide="loading">
+        <div ng-view></div>
+        <div ng-include="'view/footer.html'"></div>
+    </div>
 </body>
 </html>

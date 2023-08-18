@@ -4,7 +4,7 @@
     <ui-alert ng-show="error" title="Um problema aconteceu!" >
       {{error}}
     </ui-alert>
-    <input type="text" ng-model="busca" placeholder="Digite para filtrar" class="form-control"/>
+    <input ng-model-options="{updateOn: 'default blur', debounce:{default:500, blur:0}}" type="text" ng-model="busca" placeholder="Digite para filtrar" class="form-control"/>
     <table class="table">
       <tr>
         <th></th>
@@ -13,19 +13,20 @@
         <th><a href="" ng-click="ordenarPor('telefone')" >Telefone</a></th>
         <th><a href="" ng-click="ordenarPor('idade')" >Idade</a></th>
         <th><a href="" ng-click="ordenarPor('operadora.nome')" >Operadora</a></th>
+        <th><a href="" ng-click="ordenarPor('operadora.preco')" >Preço</a></th>
         <th><a href="" ng-click="ordenarPor('data')" >Data de Inclusão</a></th>
         <th>Status</th>
       </tr>
-      <tr ng-class="{selecionado: registro.selecionado}"
-          ng-repeat="registro in registros | filter:busca | orderBy:ordenacao:valordem"
-          ng-class="classe1">
-        <td><input type="checkbox" ng-model="registro.selecionado"></td>
-        <td>{{registro.serial}}</td>
-        <td>{{registro.nome | name | ellipsis:20}}</td>
+      <tr ng-class="{'selecionado negrito': registro.selecionado}"
+          ng-repeat="registro in registros | filter:busca | orderBy:ordenacao:valordem">
+        <td><input type="checkbox" ng-model="registro.selecionado" ng-click="verificarRegistroSelecinado(registros)"></td>
+        <td>{{::registro.serial}}</td>
+        <td><a href="#!/detalhesRegistro/{{registro.id}}">{{::registro.nome | name}}</a></td>
         <td>{{registro.telefone}}</td>
         <td>{{registro.idade}}</td>
-        <td>{{registro.operadora.nome}}</td>
-        <td>{{registro.data | date: 'dd/MM/yyyy'}}</td>
+        <td>{{::registro.operadora.nome}}</td>
+        <td>{{::registro.operadora.precoComImposto | currency}}</td>
+        <td>{{::registro.data | date: 'dd/MM/yyyy'}}</td>
         <td><div ng-click="alternarStatus()"
                  style="margin-left: 20px; width: 20px; height: 20px;"
                  ng-style="{'background-color': getCor(registro)}"></div></td>
@@ -34,8 +35,8 @@
     <hr/>
     <a class="btn btn-primary btn-block" href="#!/novoRegistro">Novo Registro</a>
     <button class="btn btn-danger btn-block"
-            ng-click="removerRegistro(registros)"
-            ng-disabled="!registroSelecionado(registros)">Remover Registro(s)</button>
+            ng-if="hasRegistroSelecionado"
+            ng-click="removerRegistros(registros)">Remover Registro(s)</button>
     <br>
     <button ng-show="registroSelecionado(registros)"
             class="btn btn-success"

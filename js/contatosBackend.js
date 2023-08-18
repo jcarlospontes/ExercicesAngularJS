@@ -10,14 +10,14 @@ app.use(express.json());
 
 
 var registros = [
-    {serial: "%/42=\\FNO-" ,nome: "João", telefone: "(85) 9 8787-8787", idade: "18", data: new Date(), operadora:{nome: "Vivo", codigo: "12"} , status:false},
-    {serial: "WS2SXV[$L/",nome: "Pedro", telefone: "(85) 3232-3232", idade: "44", data: new Date(), operadora:{nome: "Claro", codigo: "12"} , status:false},
-    {serial:"OIU^37W_[Z" ,nome: "Ana", telefone: "(11) 9 8332-3232", idade: "32", data: new Date(), operadora:{nome: "Tim", codigo: "12"} , status:false}
+    {id:1, serial: "%/42=\\FNO-" ,nome: "João", telefone: "(85) 9 8787-8787", idade: "18", data: new Date(), operadora:{nome: "Vivo", codigo: "12", preco:3} , status:false},
+    {id:2, serial: "WS2SXV[$L/",nome: "Pedro", telefone: "(85) 3232-3232", idade: "44", data: new Date(), operadora:{nome: "Claro", codigo: "12", preco:1} , status:false},
+    {id:3, serial:"OIU^37W_[Z" ,nome: "Ana", telefone: "(11) 9 8332-3232", idade: "32", data: new Date(), operadora:{nome: "Tim", codigo: "12", preco:2} , status:false}
 ];
 var operadoras = [
-    {nome: "Tim", codigo: "11", preco: 2},
-    {nome: "Claro", codigo: "12", preco: 1},
-    {nome: "Vivo", codigo: "13", preco: 3}
+    {nome: "Tim", codigo: "11", preco:2},
+    {nome: "Claro", codigo: "12", preco:1},
+    {nome: "Vivo", codigo: "13", preco:3}
 ];
 
 app.listen(process.env.PORT || 3412);
@@ -34,7 +34,7 @@ app.get('/registros', function(req, res) {
 });
 
 app.get('/registros/:id', function(req, res) {
-    res.json(registros.find(c => c.id === req.params.id));
+    res.json(registros.find(c => c.id == req.params.id));
 });
 
 app.post('/registros', function(req, res) {
