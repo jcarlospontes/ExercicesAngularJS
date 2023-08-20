@@ -1,6 +1,9 @@
-angular.module("catalogoRegistros").controller("novoRegistroCtrl", function($scope, operadorasAPI, registrosAPI, serialGenerator, $location, operadoras){
+angular.module("catalogoRegistros").controller("novoRegistroCtrl", function($scope, operadoras, registrosAPI, serialGenerator, $location, imagemService){
 
     $scope.operadoras = operadoras.data;
+    $scope.apertou = false;
+    $scope.titulo = "Registrando";
+    $scope.showImage = imagemService.getImageStatus();
 
     $scope.adicionarRegistro = function(registro) {
         if(!$scope.registroForm.$invalid){

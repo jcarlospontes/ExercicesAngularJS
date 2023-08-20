@@ -11,7 +11,7 @@ app.use(express.json());
 
 var registros = [
     {id:1, serial: "%/42=\\FNO-" ,nome: "João", telefone: "(85) 9 8787-8787", idade: "18", data: new Date(), operadora:{nome: "Vivo", codigo: "12", preco:3} , status:false},
-    {id:2, serial: "WS2SXV[$L/",nome: "Pedro", telefone: "(85) 3232-3232", idade: "44", data: new Date(), operadora:{nome: "Claro", codigo: "12", preco:1} , status:false},
+    {id:2, serial: "WS2SXV[$L/",nome: "Pedro", telefone: "(85) 3232-3232", idade: "44", data: new Date(), operadora:{nome: "Claro", codigo: "12", preco:1} , status:true},
     {id:3, serial:"OIU^37W_[Z" ,nome: "Ana", telefone: "(11) 9 8332-3232", idade: "32", data: new Date(), operadora:{nome: "Tim", codigo: "12", preco:2} , status:false}
 ];
 var operadoras = [

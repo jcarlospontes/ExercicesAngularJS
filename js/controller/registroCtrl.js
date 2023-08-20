@@ -1,14 +1,18 @@
-angular.module("catalogoRegistros").controller("registroController", function($scope, registros, serialGenerator, operadoras){
-    $scope.operadoras = operadoras.data;
+angular.module("catalogoRegistros").controller("registroController", function($scope, registros, serialGenerator, operadoras, imagemService){
 
-    $scope.titulo = "Registro de funcionários"
-    $scope.registros = registros.data;
-    $scope.apertou = false;
+    $scope.titulo = "Catalogo de Registros"
     $scope.operadoras = operadoras.data;
+    $scope.registros = registros.data;
+    $scope.showImage = imagemService.getImageStatus();
 
     var init = function (){
         calcularImpostos($scope.registros);
         generateSerial($scope.registros);
+    };
+
+    $scope.reset = function (){
+      $scope.registros = angular.copy($scope.registros);
+      $scope.busca = "";
     };
 
     var calcularImpostos = function (registros){
@@ -27,7 +31,6 @@ angular.module("catalogoRegistros").controller("registroController", function($s
         registrosAPI.saveRegistros(registro).success(function (data) {
             delete $scope.registro;
             $scope.registrosForm.$setPristine();
-            carregarRegistros();
         });
     };
 
@@ -40,10 +43,10 @@ angular.module("catalogoRegistros").controller("registroController", function($s
 
     $scope.getCor = function(registro){
         if(registro.status){
-            return "blue";
+            return "#37d00e";
         }
         else{
-            return "red";
+            return "#FF0000";
         }
     }
 
@@ -61,7 +64,7 @@ angular.module("catalogoRegistros").controller("registroController", function($s
 
 
     $scope.verificarRegistroSelecinado = function (registros){
-        $scope.hasRegistroSelecionado = registros.some(function (registro){
+        $scope.hasRegistroSelecionado = registros.some(function (registro) {
             return registro.selecionado;
         });
     };
@@ -76,6 +79,11 @@ angular.module("catalogoRegistros").controller("registroController", function($s
         var imposto = 1.2;
         return preco * imposto;
     };
+
+    $scope.clickImage = function (){
+        imagemService.getImage();
+        $scope.showImage = imagemService.getImageStatus();
+    }
 
 
     init();

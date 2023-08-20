@@ -3,11 +3,15 @@ angular.module("catalogoRegistros").config(function ($routeProvider){
         templateUrl: "view/registros.html",
         controller: "registroController",
         resolve: {
-            operadoras: function (operadorasAPI){
-                return operadorasAPI.getOperadoras();
+            operadoras: function (operadorasAPI, $location){
+                return operadorasAPI.getOperadoras().catch(function() {
+                    $location.path('/error');
+                });
             },
             registros: function (registrosAPI){
-                return registrosAPI.getRegistros();
+                return registrosAPI.getRegistros().catch(function() {
+                    $location.path('/error');
+                });
             }
         }
     });

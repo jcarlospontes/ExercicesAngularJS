@@ -1,11 +1,51 @@
 <div class="jumbotron">
+    <img src="/img/mc.png" class=image ng-show="showImage">
+    <h4>{{titulo}}</h4>
 <form name="registroForm">
-    <input name="nome"
-           ng-required="true"
-           class="form-control"
-           type="text"
-           ng-model="registro.nome"
-           placeholder="Nome"/>
+    <select class="form-control" ng-model="registro.tipo">
+        <option value="">Selecione o tipo</option>
+        <option>Pessoa Física</option>
+        <option>Pessoa Jurídica</option>
+    </select>
+
+    <div ng-if="registro.tipo === 'Pessoa Física'">
+        <input name="nome"
+               ng-required="true"
+               class="form-control"
+               maxlength="55"
+               type="text"
+               ng-model="registro.nome"
+               placeholder="Nome"/>
+        <input name="cpf"
+               ng-required="true"
+               class="form-control"
+               type="text"
+               ng-model="registro.cpf"
+               placeholder="CPF"
+               ui-cpf/>
+    </div>
+    <div ng-if="registro.tipo === 'Pessoa Jurídica'">
+        <input name="nomeFantasia"
+               ng-required="true"
+               class="form-control"
+               maxlength="55"
+               type="text"
+               ng-model="registro.nomeFantasia"
+               placeholder="Nome Fantasia"/>
+        <input name="cnpj"
+               ng-required="true"
+               class="form-control"
+               type="text"
+               ng-model="registro.cnpj"
+               placeholder="CNPJ"
+               ui-cnpj/>
+        <input name="razaoSocial"
+               ng-required="true"
+               class="form-control"
+               type="text"
+               ng-model="registro.razaoSocial"
+               placeholder="Razão Social"/>
+    </div>
     <input name="telefone"
            ng-minlength="14"
            ng-required="true"

@@ -1,10 +1,9 @@
+<button class="btn btn-primary" ng-click="clickImage()">Imagem</button>
 <div class="jumbotron">
+  <img src="/img/mc.png" class=image ng-show="showImage">
   <div>
     <h4>{{titulo}}</h4>
-    <ui-alert ng-show="error" title="Um problema aconteceu!" >
-      {{error}}
-    </ui-alert>
-    <input ng-model-options="{updateOn: 'default blur', debounce:{default:500, blur:0}}" type="text" ng-model="busca" placeholder="Digite para filtrar" class="form-control"/>
+    <input name="inputbusca" ng-model-options="{updateOn: 'default blur', debounce:{default:500, blur:0}}" type="text" ng-model="busca" placeholder="Digite para filtrar" class="form-control"/>
     <table class="table">
       <tr>
         <th></th>
@@ -18,7 +17,7 @@
         <th>Status</th>
       </tr>
       <tr ng-class="{'selecionado negrito': registro.selecionado}"
-          ng-repeat="registro in registros | filter:busca | orderBy:ordenacao:valordem">
+          ng-repeat="registro in registros | filter:busca | orderBy:ordenacao:valordem track by registro.id">
         <td><input type="checkbox" ng-model="registro.selecionado" ng-click="verificarRegistroSelecinado(registros)"></td>
         <td>{{::registro.serial}}</td>
         <td><a href="#!/detalhesRegistro/{{registro.id}}">{{::registro.nome | name}}</a></td>
@@ -27,24 +26,25 @@
         <td>{{::registro.operadora.nome}}</td>
         <td>{{::registro.operadora.precoComImposto | currency}}</td>
         <td>{{::registro.data | date: 'dd/MM/yyyy'}}</td>
-        <td><div ng-click="alternarStatus()"
-                 style="margin-left: 20px; width: 20px; height: 20px;"
-                 ng-style="{'background-color': getCor(registro)}"></div></td>
+        <td>
+          <div style="margin-left: 20px; width: 20px; height: 20px;"
+               ng-style="{'background-color': getCor(registro)}"></div>
+        </td>
       </tr>
     </table>
+    <button class="btn btn-primary" ng-click="reset()">Reset</button>
     <hr/>
-    <a class="btn btn-primary btn-block" href="#!/novoRegistro">Novo Registro</a>
+    <a class="btn btn-primary btn-block"
+       href="#!/novoRegistro">Novo Registro</a>
     <button class="btn btn-danger btn-block"
             ng-if="hasRegistroSelecionado"
             ng-click="removerRegistros(registros)">Remover Registro(s)</button>
     <br>
-    <button ng-show="registroSelecionado(registros)"
-            class="btn btn-success"
+    <button class="btn btn-success"
             ng-click="ativarStatus(registros)"
-            ng-disabled="!registroSelecionado(registros)">Ativar</button>
-    <button ng-show="registroSelecionado(registros)"
-            class="btn btn-dark"
+            ng-if="hasRegistroSelecionado">Ativar</button>
+    <button class="btn btn-dark"
             ng-click="desativarStatus(registros)"
-            ng-disabled="!registroSelecionado(registros)">Desativar</button>
+            ng-if="hasRegistroSelecionado">Desativar</button>
   </div>
 </div>

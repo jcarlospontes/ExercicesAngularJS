@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Catalogo de Registros</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/ui.css">
@@ -19,6 +19,7 @@
     <script src="js/controller/detalhesRegistroCtrl.js"></script>
     <script src="js/services/registrosAPIService.js"></script>
     <script src="js/services/operadorasAPIService.js"></script>
+    <script src="js/services/imagemService.js"></script>
     <script src="js/config/serialGeneratorConfig.js"></script>
     <script src="js/config/routeConfig.js"></script>
     <script src="js/config/interceptorsConfig.js"></script>
@@ -27,6 +28,8 @@
     <script src="js/directives/uiAlertDirective.js"></script>
     <script src="js/directives/uiDateDirective.js"></script>
     <script src="js/directives/uiTelefoneDirective.js"></script>
+    <script src="js/directives/uiCnpjDirective.js"></script>
+    <script src="js/directives/uiCpfDirective.js"></script>
     <script src="js/configValue.js"></script>
     <script src="js/interceptors/timestampInterceptor.js"></script>
     <script src="js/interceptors/errorInterceptor.js"></script>
@@ -35,7 +38,8 @@
 </head>
 <body>
     <div class="jumbotron" ng-show="loading">
-        <h5>Carregando</h5>
+        <img src="/img/mo.png" class=image>
+        <h4>Carregando</h4>
     </div>
     <div ng-hide="loading">
         <div ng-view></div>

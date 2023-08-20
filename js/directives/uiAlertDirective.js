@@ -4,8 +4,7 @@ angular.module("catalogoRegistros").directive("uiAlert", function (){
        replace: true,
        restrict: "AE",
        scope:{
-           title: "@title",
-           error: "=message"
+           title: "@",
        },
        transclude:true
    };

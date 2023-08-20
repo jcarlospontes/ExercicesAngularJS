@@ -9,6 +9,9 @@
         <tr>
             <td>{{registro.data | date:"dd/MM/yyyy"}}</td>
         </tr>
+        <tr>
+            <td>{{registro.status ? 'Ativo' : 'Desativado'}}</td>
+        </tr>
     </table>
     <a href="#!/registros">Voltar</a>
 </div>

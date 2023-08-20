@@ -23,3 +23,7 @@ button {
 .selecionado {
     background-color: lightgray;
 }
+
+.image {
+    width: 100px;
+}

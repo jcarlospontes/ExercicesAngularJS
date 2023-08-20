@@ -1,6 +1,7 @@
 angular.module("catalogoRegistros").factory("registrosAPI", function($http, config){
     var _getRegistros = function () {
-        return $http.get(config.baseURL + "/registros");
+        return $http.get(config.baseURL + "/registros")
+
     };
 
     var _getRegistro = function (id) {
