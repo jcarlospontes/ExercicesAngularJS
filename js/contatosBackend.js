@@ -1,13 +1,13 @@
 var express = require('express');
-var multer = require('multer'); // Import multer
-
 var app = express();
-var upload = multer(); // Initialize multer instance
+var bodyParser = require('body-parser');
 
 app.use(express.static(__dirname + '/public'));
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
 
 var registros = [
     {id:1, serial: "%/42=\\FNO-" ,nome: "João", telefone: "(85) 9 8787-8787", idade: "18", data: new Date(), operadora:{nome: "Vivo", codigo: "12", preco:3} , status:false},
@@ -22,7 +22,7 @@ var operadoras = [
 
 app.listen(process.env.PORT || 3412);
 
-app.use(function(req, res, next) {
+app.all('*', function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
