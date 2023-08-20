@@ -5,6 +5,11 @@ angular.module("catalogoRegistros").controller("novoRegistroCtrl", function($sco
     $scope.titulo = "Registrando";
     $scope.showImage = imagemService.getImageStatus();
 
+    $scope.clickImage = function (){
+        imagemService.getImage();
+        $scope.showImage = imagemService.getImageStatus();
+    }
+
     $scope.adicionarRegistro = function(registro) {
         if(!$scope.registroForm.$invalid){
             $scope.apertou = false;

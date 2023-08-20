@@ -34,16 +34,18 @@
     <script src="js/interceptors/timestampInterceptor.js"></script>
     <script src="js/interceptors/errorInterceptor.js"></script>
     <script src="js/interceptors/loadingInterceptor.js"></script>
-
 </head>
-<body>
-    <div class="jumbotron" ng-show="loading">
-        <img src="/img/mo.png" class=image>
-        <h4>Carregando</h4>
+<body class="bak">
+    <div ng-show="loading">
+        <button class="btn btn-primary" ng-click="clickImage()">Imagem</button>
+        <div class="jumbotron">
+            <img src="/img/mo.png" class=image>
+            <h4>Carregando</h4>
+        </div>
     </div>
     <div ng-hide="loading">
         <div ng-view></div>
-        <div ng-include="'view/footer.html'"></div>
+        <div ng-include="'view/footer.html'"  class="footer"></div>
     </div>
 </body>
 </html>
